@@ -1,10 +1,10 @@
 from caltable import DataUnit
-from caltable._type_engine import NumArrayTypeEngine
+from caltable import Engines
 import plotly.express as px
 import pandas as pd
 
 @DataUnit.register(['sasa', 'corex', 'bfactor'])
-class ProteinValuesTypeEngine(NumArrayTypeEngine):
+class ProteinValuesTypeEngine(Engines.NumArrayTypeEngine):
     def __init__(self, value, iotype):
         super().__init__(value, iotype)
     

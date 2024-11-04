@@ -1,2 +1,6 @@
 test.ipynb
 __pycache__
+*.eggs
+*.egg-info
+caltable.zip
+build

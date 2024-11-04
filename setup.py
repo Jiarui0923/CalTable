@@ -1,9 +1,6 @@
-#! /usr/bin/env python3
-
-import re
 from pathlib import Path
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 tests_require = [
     "pytest>=2.3",
@@ -54,7 +51,7 @@ setup(
     long_description=read_file("README.md"),
     long_description_content_type="text/markdown",
     version=get_version(),
-    packages=["caltable"],
+    packages=find_packages(),
     python_requires=">=3.9",
     install_requires=install_requires,
     setup_requires=setup_requires,

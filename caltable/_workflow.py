@@ -1,4 +1,4 @@
-from ._calblock import CalBlock
+from .calblock import CalBlock
 from . import IndexCal
 
 class Workflow(CalBlock):
