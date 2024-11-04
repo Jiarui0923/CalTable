@@ -5,10 +5,8 @@ class CalBlock(object):
         self.name = self.__name__ if name is None else name
         self.host = host
         self.column_map = kwargs
-        self.inputs = {self.column_map.get(key, key):val
-                       for key, val in inputs.items()}
-        self.outputs = {self.column_map.get(key, key):val
-                        for key, val in outputs.items()}
+        self.inputs = inputs
+        self.outputs = outputs
         self.desc = desc
         
     def _fetch_input(self, table, row=0, params={}):
@@ -43,11 +41,11 @@ class CalBlock(object):
             doc.Title(self.name, level=3),
             doc.Text(f'\n{self.desc}  \n'),
             doc.Title('Parameters', level=4),
-            doc.Sequence({param:f'({io_obj.iotype.meta}:**{io_obj.iotype.name}**){"_[OPTIONAL]_" if io_obj.optional else ""}=`{io_obj.default}`; {io_obj.desc}; (`{io_obj.iotype.condition}`) {io_obj.iotype.doc}'
+            doc.Sequence({self.column_map.get(param, param):f'({io_obj.iotype.meta}:**{io_obj.iotype.name}**){"_[OPTIONAL]_" if io_obj.optional else ""}=`{io_obj.default}`; {io_obj.desc}; (`{io_obj.iotype.condition}`) {io_obj.iotype.doc}'
                           for param, io_obj
                           in self.inputs.items()}),
             doc.Title('Returns', level=4),
-            doc.Sequence({param:f'({io_obj.iotype.meta}:**{io_obj.iotype.name}**){"_[OPTIONAL]_" if io_obj.optional else ""}=`{io_obj.default}`; {io_obj.desc}; (`{io_obj.iotype.condition}`) {io_obj.iotype.doc}'
+            doc.Sequence({self.column_map.get(param, param):f'({io_obj.iotype.meta}:**{io_obj.iotype.name}**){"_[OPTIONAL]_" if io_obj.optional else ""}=`{io_obj.default}`; {io_obj.desc}; (`{io_obj.iotype.condition}`) {io_obj.iotype.doc}'
                           for param, io_obj
                           in self.outputs.items()}),
         )

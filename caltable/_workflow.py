@@ -11,19 +11,23 @@ class Workflow(CalBlock):
                          outputs=self._outputs_analysis(),
                          desc=desc)
     def _inputs_analysis(self):
-        _existed_inputs = [key for key in self._blocks[0].outputs]
-        _inputs = {key:val for key, val in self._blocks[0].inputs.items()}
+        _existed_inputs = [self._blocks[0].column_map.get(key, key)
+                           for key in self._blocks[0].outputs]
+        _inputs = {self._blocks[0].column_map.get(key, key):val
+                   for key, val in self._blocks[0].inputs.items()}
         for block_ in self._blocks[1:]:
             for key, val in block_.inputs.items():
+                key = block_.column_map.get(key, key)
                 if key not in _inputs and key not in _existed_inputs:
                     _inputs[key] = val
             for key in block_.outputs:
+                key = block_.column_map.get(key, key)
                 if key not in _existed_inputs: _existed_inputs.append(key)
         return _inputs
     def _outputs_analysis(self):
         _outputs = {}
         for block_ in self._blocks:
-            for key, val in block_.outputs.items(): _outputs[key] = val
+            for key, val in block_.outputs.items(): _outputs[block_.column_map.get(key, key)] = val
         return _outputs
     
     def __len__(self): return len(self._blocks)
