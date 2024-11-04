@@ -183,6 +183,19 @@
                 ]
             ]
         },
+        "read-table": {
+            "name": "Fetch Local Sheet",
+            "desc": "Fetch parameters from local sheet file.",
+            "workflow": [
+                [
+                    "read-sheet",
+                    {
+                        "path": "sheet_path",
+                        "row_index": "pdb_id"
+                    }
+                ]
+            ]
+        },
         "corex": {
             "name": "COREX",
             "desc": "Run COREX for the pdb column.",
