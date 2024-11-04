@@ -18,13 +18,25 @@ class Parameter(object):
             'default': self.default,
             'desc': self.desc
         }
+    
+    @staticmethod
+    def string(name, desc='', default_value=None, optional=False):
+        return Parameter(name, IOType(meta='string', id='string', name='string'),
+                         desc, default_value, optional)
+    
+    @staticmethod
+    def number(name, desc='', default_value=None, optional=False):
+        return Parameter((name, IOType(meta='number', id='number', name='number'),
+                          desc, default_value, optional))
+    
+    @staticmethod
+    def numarray(name, desc='', default_value=None, optional=False):
+        return Parameter((name, IOType(meta='numarray', id='numarray', name='numarray'),
+                          desc, default_value, optional))
+    
         
 meta_types = {
     'string': IOType(meta='string', id='string', name='string'),
     'number': IOType(meta='number', id='number', name='number'),
     'numarray': IOType(meta='numarray', id='numarray', name='numarray'),
 }  
-        
-string = Parameter(name='string', io_type=meta_types['string'])
-number = Parameter(name='number', io_type=meta_types['number'])
-numarray = Parameter(name='numarray', io_type=meta_types['numarray'])

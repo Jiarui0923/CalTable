@@ -35,7 +35,17 @@ class CalLibIndex(object):
                 if _source == _block[0]: return _block[1]
         raise IndexError(f'{_name} exists in {[_block[0] for _block in _blocks]}')
     
-    def __contains__(self, name): return any([name in _lib for _lib in self._libs])
+    def __contains__(self, name):
+        if ':' in name:
+            _name, _sources = _name.split(':')
+            _sources = [_source for _source in _sources.split(',') if len(_source) > 0]
+            if len(_sources) <= 0: raise IndexError('Empty Source!')
+            else:
+                for _source in _sources:
+                    for _lib in self._libs:
+                        if _name in _lib and _lib.source == _source: return True
+                return False
+        else: return any([name in _lib for _lib in self._libs])
     
     def _repr_markdown_(self):
         _doc = doc.Document(

@@ -1,4 +1,5 @@
 from ._calblock import CalBlock
+from . import IndexCal
 
 class Workflow(CalBlock):
     def __init__(self, *args, name=None, desc=None):
@@ -22,8 +23,7 @@ class Workflow(CalBlock):
     def _outputs_analysis(self):
         _outputs = {}
         for block_ in self._blocks:
-            for key, val in block_.outputs.items():
-                if key not in _outputs: _outputs[key] = val
+            for key, val in block_.outputs.items(): _outputs[key] = val
         return _outputs
     
     def __len__(self): return len(self._blocks)
@@ -31,3 +31,19 @@ class Workflow(CalBlock):
     def forward_table(self, table):
         for _block in self._blocks: table = _block(table)
         return table
+    
+    @staticmethod
+    def load(workflow, index=IndexCal):
+        _name = workflow.get('name', None)
+        _desc = workflow.get('desc', None)
+        workflow = workflow['workflow']
+        _workflow_blocks = []
+        for _unit in workflow:
+            if isinstance(_unit, str):
+                _workflow_blocks.append(index[_unit]())
+            elif isinstance(_unit, (list, tuple)):
+                if len(_unit) >= 2: _unit, _param = _unit[0], _unit[1]
+                elif len(_unit) == 1: _unit, _param = _unit[0], {}
+                else: raise TypeError
+                _workflow_blocks.append(index[_unit](**_param))
+        return Workflow(*_workflow_blocks, name=_name, desc=_desc)

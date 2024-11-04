@@ -1,0 +1,247 @@
+{
+    "name": "COREX WorkBench (1.0)",
+    "id": "eb4b7c25-fc57-4cc0-8dc1-9216f01d77b1",
+    "desc": "Provide a set of tools and workflows for COREX computations",
+    "auth": {
+        "api_id": "fuv249u3jjjs",
+        "api_key": "adhjdvbqovo200320r"
+    },
+    "lib": [
+        {
+            "host": "https://jellyroll.cs.tulane.edu/easyapi/jellyroll/"
+        }
+    ],
+    "workflows": {
+        "read-corex": {
+            "name": "COREX (Local Files)",
+            "desc": "Run COREX for local PDB files.",
+            "workflow": [
+                [
+                    "read-file",
+                    {
+                        "file": "pdb",
+                        "filename": "pdb_id"
+                    }
+                ],
+                [
+                    "select-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "list-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "corex",
+                    {
+                        "pdb": "pdb"
+                    }
+                ]
+            ]
+        },
+        "read-sasa": {
+            "name": "SASA (Local Files)",
+            "desc": "Run SASA for local PDB files.",
+            "workflow": [
+                [
+                    "read-file",
+                    {
+                        "file": "pdb",
+                        "filename": "pdb_id"
+                    }
+                ],
+                [
+                    "select-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "list-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "sasa",
+                    {
+                        "pdb": "pdb"
+                    }
+                ]
+            ]
+        },
+        "read-bfactor": {
+            "name": "B-Factor (Local Files)",
+            "desc": "Fetch residue level b-factor for local PDB files.",
+            "workflow": [
+                [
+                    "read-file",
+                    {
+                        "file": "pdb",
+                        "filename": "pdb_id"
+                    }
+                ],
+                [
+                    "select-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "list-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "bfactor",
+                    {
+                        "pdb": "pdb"
+                    }
+                ]
+            ]
+        },
+        "read-all": {
+            "name": "Run all things (Local Files)",
+            "desc": "Calculate COREX, SASA, and B-factor for local PDB files.",
+            "workflow": [
+                [
+                    "read-file",
+                    {
+                        "file": "pdb",
+                        "filename": "pdb_id"
+                    }
+                ],
+                [
+                    "select-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "list-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "bfactor",
+                    {
+                        "pdb": "pdb"
+                    }
+                ],
+                [
+                    "sasa",
+                    {
+                        "pdb": "pdb"
+                    }
+                ],
+                [
+                    "corex",
+                    {
+                        "pdb": "pdb"
+                    }
+                ]
+            ]
+        },
+        "read-pdbs": {
+            "name": "Run PDB files",
+            "desc": "Read local PDB files and select chain.",
+            "workflow": [
+                [
+                    "read-file",
+                    {
+                        "file": "pdb",
+                        "filename": "pdb_id"
+                    }
+                ],
+                [
+                    "select-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ],
+                [
+                    "list-chain",
+                    {
+                        "pdb": "pdb",
+                        "chain": "chain"
+                    }
+                ]
+            ]
+        },
+        "corex": {
+            "name": "COREX",
+            "desc": "Run COREX for the pdb column.",
+            "workflow": [
+                [
+                    "corex",
+                    {
+                        "pdb": "pdb"
+                    }
+                ]
+            ]
+        },
+        "sasa": {
+            "name": "SASA",
+            "desc": "Run SASA for pdb column.",
+            "workflow": [
+                [
+                    "sasa",
+                    {
+                        "pdb": "pdb"
+                    }
+                ]
+            ]
+        },
+        "bfactor": {
+            "name": "B-Factor",
+            "desc": "Fetch residue level b-factor for PDB column.",
+            "workflow": [
+                [
+                    "bfactor",
+                    {
+                        "pdb": "pdb"
+                    }
+                ]
+            ]
+        },
+        "all": {
+            "name": "Run all things",
+            "desc": "Calculate COREX, SASA, and B-factor for PDB column.",
+            "workflow": [
+                [
+                    "bfactor",
+                    {
+                        "pdb": "pdb"
+                    }
+                ],
+                [
+                    "sasa",
+                    {
+                        "pdb": "pdb"
+                    }
+                ],
+                [
+                    "corex",
+                    {
+                        "pdb": "pdb"
+                    }
+                ]
+            ]
+        }
+    }
+}

@@ -32,10 +32,10 @@ class CalBlock(object):
     def forward_table(self, table):
         for row in range(len(table)):
             _inputs = self._fetch_input(table, row=row,
-                                        params=self.remote_algorithm.inputs)
+                                        params=self.inputs)
             _outputs = self.forward(**_inputs)
             self._assign_output(table, row=row, outputs=_outputs,
-                                params=self.remote_algorithm.outputs)
+                                params=self.outputs)
         return table
     def __call__(self, *args, **kwargs): return self.forward_table(*args, **kwargs)
     def _repr_markdown_(self):

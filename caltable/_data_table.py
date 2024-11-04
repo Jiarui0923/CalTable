@@ -48,7 +48,21 @@ class DataTable(object):
         for key, val in type_map.items(): self.set_type(key, val)
     def __setitem__(self, keys, val):
         row, col = keys[0], keys[1]
-        self._table[row][col] = DataUnit(value=val, parameter=self.columns.get(col))
+        _param = self.columns.get(col)
+        if _param is None:
+            key = col
+            if isinstance(val, str): self.columns[key] = Parameter(name=key, io_type=meta_types['string'])
+            elif isinstance(val, (int, float)): self.columns[key] = Parameter(name=key, io_type=meta_types['number'])
+            elif isinstance(val, list) and all([isinstance(i, (int, float)) for i in val]):
+                self.columns[key] = Parameter(name=key, io_type=meta_types['numarray'])
+            else: self.columns[key] = Parameter(name=key, io_type=meta_types['string'])
+        _data = DataUnit(value=val, parameter=self.columns.get(col))
+        if isinstance(row, slice):
+            if row.start is None and row.stop is None:
+                for i in range(len(self._table)): self._table[i][col] = _data
+            else:
+                for i in range(row.start, row.stop, row.step): self._table[i][col] = _data
+        else: self._table[row][col] = _data
     def __getitem__(self, keys):
         col = None
         if isinstance(keys, tuple):

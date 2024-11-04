@@ -1,0 +1,1 @@
+{"name": "APL (Local Files)", "desc": "Intigrated APL pipeline for local PDB files.", "workflow": [["read-file", {"file": "pdb", "filename": "pdb_id"}], ["select-chain", {"pdb": "pdb", "chain": "chain"}], ["list-chain", {"pdb": "pdb", "chain": "chain"}], ["sasa", {"pdb": "pdb", "sasa": "sasa"}], ["bfactor", {"pdb": "pdb"}], ["corex:Jellyroll Bioinformatics", {"pdb": "pdb"}]]}
