@@ -7,7 +7,16 @@ class Parameter(object):
         self.desc = desc
         self.optional = optional
         self.default = default_value
-        self.iotype = io_type
+        self.iotype = io_type if isinstance(io_type, IOType) else IOType(**io_type)
+    
+    def to_dict(self):
+        return dict(
+            name    = self.name,
+            io_type = self.iotype.to_dict(),
+            desc    = self.desc,
+            default_value = self.default,
+            optional      = self.optional
+        )
     
     @property
     def property(self):

@@ -1,6 +1,6 @@
 from .calblock._lib import CalBlockLib
 from .calblock._lib import RemoteCalBlockLib
-from .easyapi_client import docflow as doc
+from .easyaccess import docflow as doc
 from . import LocalCal
 import json
 import os

@@ -1,6 +1,6 @@
 import pandas as pd
 from collections import OrderedDict
-from .easyapi_client.remote_algorithm import Parameter, meta_types
+from .easyaccess.remote_algorithm import Parameter, meta_types
 from ._data_unit import DataUnit
 
 class DataTable(object):

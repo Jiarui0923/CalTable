@@ -2,7 +2,7 @@ from uuid import uuid4
 import json
 import os
 
-from .easyapi_client import docflow as doc
+from .easyaccess import docflow as doc
 from ._workflow import Workflow
 from ._lib_index import CalLibIndex
 

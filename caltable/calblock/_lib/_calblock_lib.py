@@ -1,4 +1,4 @@
-from ...easyapi_client import docflow as doc
+from ...easyaccess import docflow as doc
 
 class CalBlockLib(object):
     

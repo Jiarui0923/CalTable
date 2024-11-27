@@ -1,4 +1,4 @@
-from ..easyapi_client import docflow as doc
+from ..easyaccess import docflow as doc
 
 class CalBlock(object):
     def __init__(self, name=None, host='local', inputs={}, outputs={}, desc='', **kwargs):

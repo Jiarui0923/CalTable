@@ -12,9 +12,9 @@ from .calblock._lib import RemoteCalBlockLib
 from .calblock._lib import LocalCalBlockLib
 
 
-from .easyapi_client.parameter import meta_types
-from .easyapi_client.parameter import Parameter
-from .easyapi_client.parameter import IOType
+from .easyaccess.parameter import meta_types
+from .easyaccess.parameter import Parameter
+from .easyaccess.parameter import IOType
 
 from . import extentions
 

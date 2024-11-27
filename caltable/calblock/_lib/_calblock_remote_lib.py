@@ -1,7 +1,7 @@
 from ._calblock_lib import CalBlockLib
 from .._calblock_remote import CalBlockRemote
-from ...easyapi_client import docflow as doc
-from ...easyapi_client import EasyAccess
+from ...easyaccess import docflow as doc
+from ...easyaccess import EasyAccess
 
 class RemoteCalBlockLib(CalBlockLib):
     
@@ -9,6 +9,7 @@ class RemoteCalBlockLib(CalBlockLib):
         if client is None: client = EasyAccess(host=host, api_id=api_id, api_key=api_key)
         self.client = client
         _host = client._get_server_info()['server']
+        self.host = _host
         _blocks = {}
         for algorithm in client.algorithms:
             _blocks[algorithm] = client[algorithm]

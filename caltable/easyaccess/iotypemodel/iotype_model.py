@@ -22,6 +22,16 @@ class IOType(object):
         self.condition = condition
         self.version   = version
         
+    def to_dict(self):
+        return dict(
+            meta      = self.meta,
+            id        = self.id,
+            name      = self.name,
+            doc       = self.doc,
+            condition = self.condition,
+            version   = self.version
+        )
+        
     def __repr__(self): return f'<{self.name}({self.meta}) {self.id}:{self.version}>'
         
     @property
