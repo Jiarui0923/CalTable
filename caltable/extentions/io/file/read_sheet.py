@@ -21,4 +21,6 @@ class ReadSheet(CalBlock):
         elif pathlib.Path(path).suffix == '.xlsx':
             _table = pd.read_excel(path, index_col=0)
         else: raise TypeError(f'{pathlib.Path(path).suffix} Not Supported!')
-        return _table.loc[row_index].to_dict()
+        _data = _table.loc[row_index].to_dict()
+        _data = {_k:_v for _k, _v in _data.items() if _v is not None}
+        return _data

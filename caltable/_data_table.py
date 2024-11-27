@@ -16,12 +16,13 @@ class DataTable(object):
     def _infer_type(self, table):
         for line in table:
             for key, val in line.items():
-                if isinstance(val, str): self.columns[key] = Parameter(name=key, io_type=meta_types['string'])
-                elif isinstance(val, (int, float)): self.columns[key] = Parameter(name=key, io_type=meta_types['number'])
-                elif isinstance(val, list) and all([isinstance(i, (int, float)) for i in val]):
-                    self.columns[key] = Parameter(name=key, io_type=meta_types['numarray'])
-                else: self.columns[key] = Parameter(name=key, io_type=meta_types['string'])
-                line[key] = DataUnit(value=val, parameter=self.columns[key])
+                if key not in self.columns:
+                    if isinstance(val, str): self.columns[key] = Parameter(name=key, io_type=meta_types['string'])
+                    elif isinstance(val, (int, float)): self.columns[key] = Parameter(name=key, io_type=meta_types['number'])
+                    elif isinstance(val, list) and all([isinstance(i, (int, float)) for i in val]):
+                        self.columns[key] = Parameter(name=key, io_type=meta_types['numarray'])
+                    else: self.columns[key] = Parameter(name=key, io_type=meta_types['string'])
+                    line[key] = DataUnit(value=val, parameter=self.columns[key])
                 
         
     def __len__(self): return len(self._table)

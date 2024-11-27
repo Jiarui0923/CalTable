@@ -22,6 +22,9 @@ setup_requires = [
     "plotly",
     "py3Dmol",
     "openpyxl",
+    "tabulate",
+    "matplotlib",
+    "requests",
 ]
 install_requires = [
     "pip>=7",
@@ -34,6 +37,9 @@ install_requires = [
     "plotly",
     "py3Dmol",
     "openpyxl",
+    "tabulate",
+    "matplotlib",
+    "requests",
 ]
 
 
@@ -42,7 +48,7 @@ def read_file(rel_path: str):
 
 
 def get_version():
-    return '1.0.0'
+    return '1.0.1'
 
 
 setup(
