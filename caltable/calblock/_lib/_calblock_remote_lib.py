@@ -8,11 +8,11 @@ class RemoteCalBlockLib(CalBlockLib):
     def __init__(self, client=None, host=None, api_id=None, api_key=None):
         if client is None: client = EasyAccess(host=host, api_id=api_id, api_key=api_key)
         self.client = client
-        _host = client._get_server_info()['server']
+        _host = client._server_info
         self.host = _host
         _blocks = {}
-        for algorithm in client.algorithms:
-            _blocks[algorithm] = client[algorithm]
+        for algo_name, algorithm in client[client.algorithms].items():
+            _blocks[algo_name] = algorithm
         
         super().__init__(source=_host,
                          **_blocks)

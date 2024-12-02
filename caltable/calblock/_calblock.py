@@ -21,6 +21,8 @@ class CalBlock(object):
         return _inputs
     def _assign_output(self, table, row=0, outputs={}, params={}):
         table.set_types(params)
+        _mapped_params = {self.column_map[key]:val for key,val in params.items() if key in self.column_map}
+        table.set_types(_mapped_params)
         for key, val in outputs.items():
             col_name = key if key not in self.column_map else self.column_map[key]
             table[row, col_name] = val

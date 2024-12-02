@@ -3,8 +3,8 @@ from caltable import Engines
 import plotly.express as px
 import pandas as pd
 
-@DataUnit.register(['sasa', 'corex', 'bfactor', 'entropy',
-                    'residue_likelihood', 'peptide_likelihood'])
+@DataUnit.register(['sasa', 'corex', 'bfactor', 'entropy', 'apl-aggregate',
+                    'apl-residue-likelihood', 'apl-peptide-likelihood'])
 class ProteinValuesTypeEngine(Engines.NumArrayTypeEngine):
     def __init__(self, value, iotype):
         super().__init__(value, iotype)
