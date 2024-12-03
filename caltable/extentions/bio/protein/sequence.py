@@ -66,3 +66,29 @@ class SequenceAlignmentTypeEngine(Engines.StringTypeEngine):
     
     def view_html(self, **kwargs):
         return self._plot(self.value).to_html()
+    
+    
+@DataUnit.register(['protein-seq'])
+class SequenceTypeEngine(Engines.StringTypeEngine):
+    def __init__(self, value, iotype):
+        super().__init__(value, iotype)
+    
+    def _render_sequence(self, sequence, fragment_length=10, column_num=6):
+        fragments = [sequence[i:i+fragment_length] for i in range(0, len(sequence), fragment_length)]
+        index_content, fragment_content = [], []
+        for index, fragment in enumerate(fragments):
+            _index = str(index)
+            _index = f'<b>{_index}</b>' + ''.join(['&nbsp;']*(fragment_length - len(_index)))
+            index_content.append(_index)
+            fragment_content.append(f'<span style="background-color:grey;"><b>{fragment[0]}</b></span>{fragment[1:]}')
+        index_content = [index_content[i:i+column_num] for i in range(0, len(index_content), column_num)]
+        fragment_content = [fragment_content[i:i+column_num] for i in range(0, len(fragment_content), column_num)]
+        _content = '<br><br>'.join(['&nbsp;'.join(ind) + '<br>' + '&nbsp;'.join(frag) for (ind, frag) in zip(index_content, fragment_content)])
+        _content = f'<div style="overflow:scroll; font-family: Courier,monospace;">{_content}</div>'
+        return _content
+        
+    def _repr_markdown_(self):
+        return self._render_sequence(self.value, fragment_length=10, column_num=6)
+    
+    def view_html(self, **kwargs):
+        return self._render_sequence(self.value, fragment_length=10, column_num=6)
