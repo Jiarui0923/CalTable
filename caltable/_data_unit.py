@@ -28,6 +28,7 @@ class DataUnit(object):
     def __ge__(self, other): return self._binary_opt(other, self._engine.__ge__)
     def __contains__(self, other): return self._binary_opt(other, self._engine.__contains__)
     def _repr_markdown_(self): return self._engine._repr_markdown_()
+    def view_html(self, **kwargs): return self._engine.view_html(**kwargs)
     @property
     def preview(self): return self._engine.preview
     @staticmethod

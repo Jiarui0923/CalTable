@@ -1,4 +1,6 @@
 from ._type_engine import TypeEngine
+import plotly.express as px
+import pandas as pd
 
 class _MetaTypeEngine(TypeEngine):
     _iotype_meta_id = ''
@@ -40,3 +42,14 @@ class NumArrayTypeEngine(_MetaTypeEngine):
     def preview(self):
         if len(self.value) > 3: return f'{self.iotype.name}:{self.value[:3]}...({len(self.value)})'
         else: return f'{self.value}'
+        
+    def _plot(self, value):
+        fig = px.line(x=list(range(len(value))), y=value, title=self.iotype.name)
+        return fig
+        
+    def _repr_markdown_(self):
+        self._plot(self.value).show()
+        return f'{pd.DataFrame(self.value).T._repr_html_()}'
+    
+    def view_html(self, **kwargs):
+        return self._plot(self.value).to_html()

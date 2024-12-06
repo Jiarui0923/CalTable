@@ -11,7 +11,7 @@ class CalBlock(object):
         
     def _fetch_input(self, table, row=0, params={}):
         _inputs = {}
-        table.set_types(params)
+        # table.set_types(params)
         for param in params.keys():
             if param in self.column_map: col_name = self.column_map[param]
             else: col_name = param
@@ -31,11 +31,15 @@ class CalBlock(object):
     def forward(self, **inputs): raise NotImplemented
     def forward_table(self, table):
         for row in range(len(table)):
-            _inputs = self._fetch_input(table, row=row,
-                                        params=self.inputs)
-            _outputs = self.forward(**_inputs)
-            self._assign_output(table, row=row, outputs=_outputs,
-                                params=self.outputs)
+            try:
+                _inputs = self._fetch_input(table, row=row,
+                                            params=self.inputs)
+                _outputs = self.forward(**_inputs)
+                self._assign_output(table, row=row, outputs=_outputs,
+                                    params=self.outputs)
+            except Exception as e:
+                # raise Exception(f'[{row},{self.name}]: {str(e)}')
+                raise e
         return table
     def __call__(self, *args, **kwargs): return self.forward_table(*args, **kwargs)
     def _repr_markdown_(self):
