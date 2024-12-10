@@ -50,6 +50,6 @@ class Document:
         if format == 'markdown':
             with open(path, 'w') as f: f.write(self.markdown)
         elif format == 'html':
-            with open(_style_sheet_path, 'r') as f: style_sheet = f.read()
-            with open(path, 'w') as f: f.write(f'<meta name="viewport" content="width=device-width, initial-scale=1">\n<article class="markdown-body">\n{self.html}\n</article>\n<style>\n{style_sheet}\n</style>\n{_style_header}')
+            with open(_style_sheet_path, 'r', encoding='utf-8') as f: style_sheet = f.read()
+            with open(path, 'w', encoding='utf-8') as f: f.write(f'<meta name="viewport" content="width=device-width, initial-scale=1">\n<article class="markdown-body">\n{self.html}\n</article>\n<style>\n{style_sheet}\n</style>\n{_style_header}')
         else: raise ValueError(f'Format {format} Not Support')

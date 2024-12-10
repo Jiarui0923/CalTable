@@ -94,7 +94,7 @@ class DataTable(object):
                 for cell in self[row].values():
                     cell.file().save(path=_case_path)
                     _file_counts += 1
-            shutil.make_archive(file_name, format=format, root_dir=temp_dir, base_dir=path)
+            shutil.make_archive(os.path.join(path, file_name), format=format, root_dir=temp_dir)
         return _file_counts
     
     def report(self, title=None, index_col=None):
