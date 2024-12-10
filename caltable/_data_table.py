@@ -5,6 +5,7 @@ import shutil
 from collections import OrderedDict
 from .easyaccess.remote_algorithm import Parameter, meta_types
 from ._data_unit import DataUnit
+from .easyaccess import docflow as doc
 
 class DataTable(object):
     
@@ -95,3 +96,25 @@ class DataTable(object):
                     _file_counts += 1
             shutil.make_archive(file_name, format=format, root_dir=temp_dir, base_dir=path)
         return _file_counts
+    
+    def report(self, title=None, index_col=None):
+        doc_blocks = []
+        for row in range(len(self)):
+            _index = str(self[row, index_col].preview if index_col is not None else row)
+            doc_blocks_row = []
+            doc_blocks_row.append(doc.Title(_index, level=3))
+            for cell in self[row].values():
+                _doc_unit = doc.Document(
+                    doc.Title(cell.name, level=4),
+                    doc.Text(cell.view_html()),
+                    doc.Text('\n\n'),
+                )
+                doc_blocks_row.append(_doc_unit)
+            doc_blocks.append(doc.Expander(doc.Document(*doc_blocks_row), _index))
+        return doc.Document(
+            doc.Title('Report' if title is None else title, level=1),
+            doc.IdenticalBadge(),
+            doc.UUIDStamp(),
+            doc.DateTimeStamp(timefmt='%d-%m-%Y %H:%M:%S'),
+            *doc_blocks
+        )
