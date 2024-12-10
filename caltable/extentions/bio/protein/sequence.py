@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from caltable import DataUnit
 from caltable import Engines
+from caltable import FileUnit
 
 @DataUnit.register(['fasta'])
 class SequenceAlignmentTypeEngine(Engines.StringTypeEngine):
@@ -67,6 +68,9 @@ class SequenceAlignmentTypeEngine(Engines.StringTypeEngine):
     def view_html(self, **kwargs):
         return self._plot(self.value).to_html()
     
+    def file(self, name=None, ext='fasta'):
+        return super().file(name, ext)
+    
     
 @DataUnit.register(['protein-seq'])
 class SequenceTypeEngine(Engines.StringTypeEngine):
@@ -92,3 +96,7 @@ class SequenceTypeEngine(Engines.StringTypeEngine):
     
     def view_html(self, **kwargs):
         return self._render_sequence(self.value, fragment_length=10, column_num=6)
+    
+    def file(self, name=None, ext='fasta'):
+        _data = f'>{name}\n{self.value}'
+        return FileUnit(_data, name=name, ext=ext)

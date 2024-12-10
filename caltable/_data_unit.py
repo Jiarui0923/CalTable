@@ -31,6 +31,7 @@ class DataUnit(object):
     def view_html(self, **kwargs): return self._engine.view_html(**kwargs)
     @property
     def preview(self): return self._engine.preview
+    def file(self, name=None): return self._engine.file(name=self.name if name is None else name)
     @staticmethod
     def register_engine(iotype_ids, engine):
         if isinstance(iotype_ids, str): DataUnit._specific_engines[iotype_ids] = engine

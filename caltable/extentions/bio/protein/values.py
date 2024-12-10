@@ -1,5 +1,6 @@
 from caltable import DataUnit
 from caltable import Engines
+from caltable import FileUnit
 import matplotlib.pyplot as plt
 import matplotlib
 import pandas as pd
@@ -37,6 +38,9 @@ class ProteinValuesTypeEngine(Engines.NumArrayTypeEngine):
         plt.close(fig)
         return _image_base64
     
+    def file(self, name=None, ext='csv'):
+        return FileUnit(pd.DataFrame({name:self.value}).to_csv(lineterminator='\n'), name=name, ext=ext)
+    
 @DataUnit.register(['mhcii', 'apl-mhc-combined'])
 class ProteinValuesTypeEngine(Engines.StringJSONTypeEngine):
     
@@ -65,3 +69,7 @@ class ProteinValuesTypeEngine(Engines.StringJSONTypeEngine):
         fig.clear()
         plt.close(fig)
         return _image_base64
+    
+    def file(self, name=None, ext='csv'):
+        _df = pd.read_json(io.StringIO(self.value))
+        return FileUnit(_df.to_csv(lineterminator='\n'), name=name, ext=ext)

@@ -1,4 +1,7 @@
 import pandas as pd
+import tempfile
+import os
+import shutil
 from collections import OrderedDict
 from .easyaccess.remote_algorithm import Parameter, meta_types
 from ._data_unit import DataUnit
@@ -79,3 +82,16 @@ class DataTable(object):
             else: _data = [line[col] if col in line else None for line in _data]
         if len(_data) == 1: _data = _data[0]
         return _data
+    
+    def export(self, path='./', file_name='package', format='zip', index_col=None):
+        _file_counts = 0
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=False) as temp_dir:
+            for row in range(len(self)):
+                _index = str(self[row, index_col].preview if index_col is not None else row)
+                _case_path = os.path.join(temp_dir, _index)
+                os.makedirs(_case_path, exist_ok=True)
+                for cell in self[row].values():
+                    cell.file().save(path=_case_path)
+                    _file_counts += 1
+            shutil.make_archive(file_name, format=format, root_dir=temp_dir, base_dir=path)
+        return _file_counts

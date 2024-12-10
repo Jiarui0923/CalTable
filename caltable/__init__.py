@@ -1,4 +1,5 @@
 from . import type_engine as Engines
+from .type_engine import FileUnit
 
 from ._data_unit  import DataUnit
 from ._data_table import DataTable

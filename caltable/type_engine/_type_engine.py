@@ -1,3 +1,5 @@
+from ._file import FileUnit
+
 class TypeEngine(object):
     def __init__(self, value, iotype): self.value, self.iotype = value, iotype
     def __repr__(self): return f'< {self.iotype.meta}:{self.iotype.name} >\n{self.value}'
@@ -16,3 +18,5 @@ class TypeEngine(object):
     @property
     def preview(self): return self.value
     def view_html(self, **kwargs): return self.value
+    
+    def file(self, name=None, ext='txt'): return FileUnit(data=self.value, name=name, ext=ext)

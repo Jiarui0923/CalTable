@@ -5,6 +5,7 @@ from tabulate import tabulate
 from .._data_unit import DataUnit
 
 from ._meta_engines import StringTypeEngine
+from ._file import FileUnit
 
 class StringTableTypeEngine(StringTypeEngine):
     def __init__(self, value, iotype, sep=' ', end='\n'):
@@ -41,3 +42,5 @@ class StringJSONTypeEngine(StringTypeEngine):
     def _repr_markdown_(self): return self._render_json(json.loads(self.value))
     def view_html(self, **kwargs):
         return self._render_json(json.loads(self.value))
+    
+    def file(self, name=None, ext='json'): return FileUnit(data=self.value, name=name, ext=ext)

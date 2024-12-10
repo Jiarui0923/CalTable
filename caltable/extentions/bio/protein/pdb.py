@@ -25,3 +25,6 @@ class ProteinPDBTypeEngine(Engines.StringTableTypeEngine):
     def view_html(self, width=400, height=300, **kwargs):
         return self._plot(self.value, width=width, height=height).write_html()
     
+    def file(self, name=None, ext='pdb'):
+        return super().file(name, ext)
+    
