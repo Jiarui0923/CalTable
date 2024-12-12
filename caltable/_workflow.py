@@ -36,8 +36,8 @@ class Workflow(CalBlock):
         for _block in self._blocks: table = _block(table)
         return table
     
-    @staticmethod
-    def load(workflow, index=IndexCal):
+    @classmethod
+    def load(cls, workflow, index=IndexCal):
         _name = workflow.get('name', None)
         _desc = workflow.get('desc', None)
         workflow = workflow['workflow']
@@ -50,4 +50,4 @@ class Workflow(CalBlock):
                 elif len(_unit) == 1: _unit, _param = _unit[0], {}
                 else: raise TypeError
                 _workflow_blocks.append(index[_unit](**_param))
-        return Workflow(*_workflow_blocks, name=_name, desc=_desc)
+        return cls(*_workflow_blocks, name=_name, desc=_desc)
