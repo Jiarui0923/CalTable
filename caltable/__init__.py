@@ -42,6 +42,23 @@ from easyaccess.parameter import Parameter  # Import Parameter for managing para
 from easyaccess.parameter import IOType  # Import IOType for input/output type definitions
 
 from .extented_blocks import *
+# main_package/__init__.py
+
+import pkg_resources
+
+def load_extensions():
+    """
+    Automatically load all registered extensions for the main package.
+    Extensions must declare themselves in the entry point `caltable.extensions`.
+    """
+    for entry_point in pkg_resources.iter_entry_points('caltable.extensions'):
+        try: entry_point.load()
+        except Exception as e:
+            import warnings
+            warnings.warn(f"Failed to load extension {entry_point.name}: {e}")
+
+# Load extensions automatically when the main package is imported
+load_extensions()
 
 LocalCal = LocalCalBlockLib()  # Instantiate a LocalCalBlockLib object
 
