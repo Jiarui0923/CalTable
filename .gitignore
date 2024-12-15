@@ -6,7 +6,5 @@ __pycache__
 caltable-*.zip
 packages
 build
-output
 *.workbench.json
 tutorial.ipynb
-apl.ipynb
