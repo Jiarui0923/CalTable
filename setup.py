@@ -10,11 +10,11 @@ DataFrames.
 
 If there is any issue, please put up with an issue or contact Jiarui Li (jli78@tulane.edu)
 '''
-VERSION = '2.0.1'
+VERSION = '2.0.2'
 NAME = 'CalTable'
 
 dependency_path_docflow = os.path.join(os.path.dirname(__file__), "dependencies", "docflow-1.0.0.zip")
-dependency_path_easyaccess = os.path.join(os.path.dirname(__file__), "dependencies", "easyaccess-1.0.0.zip")
+dependency_path_easyaccess = os.path.join(os.path.dirname(__file__), "dependencies", "easyaccess-1.0.2.zip")
 
 install_requires = [
     "pandas",
