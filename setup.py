@@ -10,17 +10,14 @@ DataFrames.
 
 If there is any issue, please put up with an issue or contact Jiarui Li (jli78@tulane.edu)
 '''
-VERSION = '2.0.2'
+VERSION = '2.0.3'
 NAME = 'CalTable'
-
-dependency_path_docflow = os.path.join(os.path.dirname(__file__), "dependencies", "docflow-1.0.0.zip")
-dependency_path_easyaccess = os.path.join(os.path.dirname(__file__), "dependencies", "easyaccess-1.0.2.zip")
 
 install_requires = [
     "pandas",
     "tabulate",
-    f"easyaccess @ file://{dependency_path_easyaccess}",
-    f"docflow @ file://{dependency_path_docflow}",
+    "easyaccess @ https://jellyroll.cs.tulane.edu/pypi/packages/easyaccess/easyaccess-1.0.3.zip",
+    "docflow @ https://jellyroll.cs.tulane.edu/pypi/packages/docflow/docflow-1.0.0.zip",
 ]
 
 
