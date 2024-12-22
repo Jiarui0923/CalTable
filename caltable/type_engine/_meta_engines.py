@@ -15,6 +15,7 @@ Affiliation: Computer Science Department, Tulane University
 from ._type_engine import TypeEngine
 import plotly.express as px
 import pandas as pd
+import math
 
 class _MetaTypeEngine(TypeEngine):
     """
@@ -149,6 +150,17 @@ class NumArrayTypeEngine(_MetaTypeEngine):
         preview (str): A preview of the numeric array, truncated if too long.
     """
     _iotype_meta_id = 'numarray'
+    
+    def __init__(self, value, iotype):
+        if isinstance(value, str):
+            try: value = [float(value)]
+            except:
+                try:
+                    if ',' in value: value = [float(i) for i in value.split(',')]
+                    if '\n' in value: value = [float(i) for i in value.split('\n')]
+                    else: value = [float(i) for i in value.split(' ')]
+                except: value = [math.nan]
+        super().__init__(value, iotype)
 
     @property
     def preview(self):
