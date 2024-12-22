@@ -56,13 +56,17 @@ class DataUnit(object):
             value: The data value to be handled.
         """
         self.parameter = parameter
-        self.value = value
         self.name = parameter.name
         self.desc = parameter.desc
         self.iotype = parameter.iotype
-        self._engine = self._build_engine(self.iotype, self.value)
-
-    def _build_engine(self, iotype, value):
+        self._engine = self._build_engine(self.iotype, value)
+    
+    @property
+    def value(self):
+        return self._engine.value
+    
+    @classmethod
+    def _build_engine(cls, iotype, value):
         """
         Builds the appropriate engine for the data based on its iotype.
         
@@ -73,8 +77,8 @@ class DataUnit(object):
         Returns:
             An engine that will handle operations for this data.
         """
-        if iotype.id in DataUnit._specific_engines:
-            return DataUnit._specific_engines[iotype.id](value=value, iotype=iotype)
+        if iotype.id in cls._specific_engines:
+            return cls._specific_engines[iotype.id](value=value, iotype=iotype)
         return _MetaEngineLibs.build(value=value, iotype=iotype)
 
     def __repr__(self):

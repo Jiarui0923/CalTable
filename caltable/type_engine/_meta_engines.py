@@ -156,9 +156,9 @@ class NumArrayTypeEngine(_MetaTypeEngine):
             try: value = [float(value)]
             except:
                 try:
-                    if ',' in value: value = [float(i) for i in value.split(',')]
-                    if '\n' in value: value = [float(i) for i in value.split('\n')]
-                    else: value = [float(i) for i in value.split(' ')]
+                    if ',' in value: value = [float(i) for i in value.split(',') if len(i) > 0]
+                    elif '\n' in value: value = [float(i) for i in value.split('\n') if len(i) > 0]
+                    else: value = [float(i) for i in value.split(' ') if len(i) > 0]
                 except: value = [math.nan]
         super().__init__(value, iotype)
 
