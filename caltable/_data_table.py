@@ -64,9 +64,13 @@ class DataTable(object):
         if df is None:
             self._table = []
         elif isinstance(df, pd.DataFrame):
-            self._table = df.T.to_dict()
+            self._table = list(df.T.to_dict().values())
+            for row_index, row in enumerate(self._table):
+                for col_index, val in row.items(): self[row_index, col_index] = val
         elif isinstance(df, list):
             self._table = df
+            for row_index, row in enumerate(self._table):
+                for col_index, val in row.items(): self[row_index, col_index] = val
         else:
             raise TypeError("Input must be a DataFrame or a list.")
         self._infer_type(self._table)
