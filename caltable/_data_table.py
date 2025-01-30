@@ -25,6 +25,7 @@ import pandas as pd
 import tempfile
 import os
 import shutil
+import re
 from collections import OrderedDict
 from easyaccess.parameter import Parameter, meta_types
 
