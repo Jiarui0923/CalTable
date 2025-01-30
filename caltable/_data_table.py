@@ -248,7 +248,8 @@ class DataTable(object):
                 _index = str(self[row, index_col].value if index_col is not None else row)
                 if len(_index) > 128: _index = _index[:128]
                 elif len(_index) <= 0: _index = str(row)
-                invalid_chars = r'[<>:"/\\|?*\x00-\x1F]'
+                invalid_chars = '[<>:"/\\|?*\x00-\x1F\\s]'
+                _index = _index.replace('\\', '_')
                 _index = re.sub(invalid_chars, '_', _index)
                 if _index in _index_dict: _index = f'{_index}({row})'
                 _index_dict.append(_index)
