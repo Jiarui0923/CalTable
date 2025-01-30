@@ -242,8 +242,15 @@ class DataTable(object):
         """
         _file_counts = 0
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=False) as temp_dir:
+            _index_dict = []
             for row in range(len(self)):
-                _index = str(self[row, index_col].preview if index_col is not None else row)
+                _index = str(self[row, index_col].value if index_col is not None else row)
+                if len(_index) > 128: _index = _index[:128]
+                elif len(_index) <= 0: _index = str(row)
+                invalid_chars = r'[<>:"/\\|?*\x00-\x1F]'
+                _index = re.sub(invalid_chars, '_', _index)
+                if _index in _index_dict: _index = f'{_index}({row})'
+                _index_dict.append(_index)
                 _case_path = os.path.join(temp_dir, _index)
                 os.makedirs(_case_path, exist_ok=True)
                 for cell in self[row].values():
