@@ -10,7 +10,7 @@ DataFrames.
 
 If there is any issue, please put up with an issue or contact Jiarui Li (jli78@tulane.edu)
 '''
-VERSION = '2.0.7'
+VERSION = '2.0.8'
 NAME = 'CalTable'
 
 install_requires = [

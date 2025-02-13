@@ -242,7 +242,7 @@ class DataTable(object):
             int: The number of files exported.
         """
         _file_counts = 0
-        with tempfile.TemporaryDirectory(ignore_cleanup_errors=False) as temp_dir:
+        with tempfile.TemporaryDirectory() as temp_dir:
             _index_dict = []
             for row in range(len(self)):
                 _index = str(self[row, index_col].value if index_col is not None else row)
