@@ -1,0 +1,150 @@
+{
+    "name": "APL WorkBench (2.0)",
+    "id": "eb4b7c25-fc57-4cc0-8dc1-9216f01d77b1",
+    "desc": "Provide a set of tools and workflows for APL computations",
+    "auth": {
+        "api_id": "---------",
+        "api_key": "---------------------------"
+    },
+    "lib": [
+        {
+            "host": "https://xxxx"
+        }
+    ],
+    "workflows": {
+        "apl": {
+            "name": "APL",
+            "desc": "Run APL for local PDB files.",
+            "workflow": [
+                [
+                    "read_file",
+                    {
+                        "file": "pdb",
+                        "filename": "pdb_id"
+                    }
+                ],
+                [
+                    "select_chain",
+                    {}
+                ],
+                [
+                    "corex",
+                    {}
+                ],
+                [
+                    "sasa",
+                    {}
+                ],
+                [
+                    "bfactor",
+                    {}
+                ],
+                [
+                    "get_sequence",
+                    {}
+                ],
+                [
+                    "blast",
+                    {}
+                ],
+                [
+                    "sequence_entropy",
+                    {}
+                ],
+                [
+                    "apl_residue",
+                    {}
+                ],
+                [
+                    "build_mers",
+                    {}
+                ],
+                [
+                    "regular_mers",
+                    {}
+                ],
+                [
+                    "apl_peptide",
+                    {}
+                ],
+                [
+                    "apl_aggregate",
+                    {}
+                ]
+            ]
+        },
+        "apl_mhc": {
+            "name": "APL-MHC",
+            "desc": "Run APL, MHC, and aggregate them for local PDB files.",
+            "workflow": [
+                [
+                    "read_file",
+                    {
+                        "file": "pdb",
+                        "filename": "pdb_id"
+                    }
+                ],
+                [
+                    "select_chain",
+                    {}
+                ],
+                [
+                    "corex",
+                    {}
+                ],
+                [
+                    "sasa",
+                    {}
+                ],
+                [
+                    "bfactor",
+                    {}
+                ],
+                [
+                    "get_sequence",
+                    {}
+                ],
+                [
+                    "blast",
+                    {}
+                ],
+                [
+                    "sequence_entropy",
+                    {}
+                ],
+                [
+                    "apl_residue",
+                    {}
+                ],
+                [
+                    "build_mers",
+                    {}
+                ],
+                [
+                    "regular_mers",
+                    {}
+                ],
+                [
+                    "apl_peptide",
+                    {}
+                ],
+                [
+                    "apl_aggregate",
+                    {}
+                ],
+                [
+                    "mhcii",
+                    {}
+                ],
+                [
+                    "combine_apl_mhc",
+                    {}
+                ],
+                [
+                    "apl_mhc_aggregate",
+                    {}
+                ]
+            ]
+        }
+    }
+}

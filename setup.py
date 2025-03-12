@@ -16,8 +16,8 @@ NAME = 'CalTable'
 install_requires = [
     "pandas",
     "tabulate",
-    "easyaccess @ https://jellyroll.cs.tulane.edu/pypi/packages/easyaccess/easyaccess-1.0.3.zip",
-    "docflow @ https://jellyroll.cs.tulane.edu/pypi/packages/docflow/docflow-1.0.0.zip",
+    "easyaccess @ git+https://github.com/Jiarui0923/EasyAccess",
+    "docflow @ git+https://github.com/Jiarui0923/DocFlow",
 ]
 
 
@@ -29,7 +29,7 @@ setup(
     version=VERSION,
     packages=find_packages(),
     install_requires=install_requires,
-    url="https://git.tulane.edu/apl/caltable",
+    url="https://github.com/Jiarui0923/CalTable",
     author='Jiarui Li, Marco K. Carbullido, Jai Bansal, Samuel J. Landry, Ramgopal R. Mettu',
     author_email=('jli78@tulane.edu'),
     maintainer=("Jiarui Li"),

@@ -4,12 +4,10 @@
 Calculate Table (`CalTable`) is a robust computational tool designed for interdisciplinary data processing, enabling users to perform calculations with the simplicity of a Pandas DataFrame interface. By connecting seamlessly with EasyAPI, CalTable allows users from various fields to easily manipulate and analyze their data, making complex computations accessible without requiring specialized programming knowledge.
 
 ## Installation
-There are two options:
-1. If you are at Tulane Campus (uptown or downtown), you could install the package from our Jellyroll Python Pakcage Index (JPIP) follow command:
-   `pip install -U caltable --index-url https://jellyroll.cs.tulane.edu/pypi/simple/`  
-   (Just make sure you connected to WIFI `tulane` or `eduroam`)
-2. For off-campus, please install using the attached file:
-   `pip install caltable-1.0.1.zip`
+The pip install command: 
+```bash
+pip install -U caltable --index-url https://github.com/Jiarui0923/CalTable
+```  
 
 ## Basic Tutorial
 **This section aims to let you learn how to use CalTable easily. For more customization function, please check the next section, advanced tutorial**
