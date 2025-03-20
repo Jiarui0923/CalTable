@@ -1,4 +1,4 @@
-<img src="images/tulane_long.png" width="128px"><img src="images/long_apl.png" width="256px"><img src="images/icon_long.png" width="128px"> 
+<img src="images/tulane_long.png" width="128px"><img src="images/icon_apl.png" width="256px"><img src="images/icon_long.png" width="128px"> 
 
 # (CalTable) Calculate Table
 `Update: 2025/03/11`
@@ -14,7 +14,7 @@ If there is any issue, please put up with an issue or contact Jiarui Li (jli78@t
 ## Installation
 The pip install command: 
 ```bash
-pip install -U caltable --index-url https://github.com/Jiarui0923/CalTable
+pip install -U caltable @ https://github.com/Jiarui0923/CalTable@2.0.8
 ```  
 
 ## Requirements
@@ -33,7 +33,7 @@ The details about docflow could be found at: https://github.com/Jiarui0923/EasyA
 ## Extensions
 There are supported extensions for scientific calculation:
 1. **CalTable-Bio**
-   https://git.tulane.edu/apl/caltable-bio  
+   [https://git.tulane.edu/apl/caltable-bio ](https://github.com/Jiarui0923/caltable-bio)
    Biology related extentions
 
 ## Getting Start
