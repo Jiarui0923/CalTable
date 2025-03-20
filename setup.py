@@ -16,8 +16,8 @@ NAME = 'CalTable'
 install_requires = [
     "pandas",
     "tabulate",
-    "easyaccess @ git+https://github.com/Jiarui0923/EasyAccess",
-    "docflow @ git+https://github.com/Jiarui0923/DocFlow",
+    "easyaccess @ git+https://github.com/Jiarui0923/EasyAccess@1.0.3",
+    "docflow @ git+https://github.com/Jiarui0923/DocFlow@1.0.0",
 ]
 
 
